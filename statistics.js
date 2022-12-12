@@ -53,7 +53,7 @@ class Statistics {
 
     mean(){
         let n = this.nTotal(), sum =this.sumNumber();
-        console.log(sum / n);
+        console.log(`Mean is: ${sum / n}`);
     }
 
     median(){
@@ -73,8 +73,29 @@ class Statistics {
         console.log(`The range is: ${result}`);
     }
 
-    variance(){}
-    standardDeviation(){}
+    squareDevition(){
+        let sumQ = 0, num = this.nTotal(), mean = this.sumNumber()/num;
+        let arr = this.datas;
+        for (let i = 0; i < this.datas.length; i++){
+            sumQ += Math.pow((arr[i] - mean), 2)
+        }
+        return sumQ;
+    }
+
+    varianceP(){
+        let n = this.nTotal(), result = this.squareDevition() / n
+        console.log(`population variance is: ${result}`);
+    }
+    varianceS(){
+        let n = this.nTotal(), result = this.squareDevition() / (n - 1)
+        console.log(`sample variance is: ${result}`);
+    }
+    SDsample(){
+        console.log(`sample SD is: ${Math.sqrt((this.squareDevition()) / (this.nTotal() - 1))}`);
+    }
+    SDpopulation(){
+        console.log(`sample SD is: ${Math.sqrt((this.squareDevition()) / this.nTotal())}`);
+    }
 }
 
 const sta = new Statistics(1,3,3,4,2,2);
@@ -82,3 +103,7 @@ sta.mean();
 sta.mode();
 sta.median();
 sta.range()
+sta.varianceP();
+sta.varianceS();
+sta.SDsample();
+sta.SDpopulation();
